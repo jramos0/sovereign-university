@@ -19,8 +19,9 @@ export const Resources = () => {
           subtitle={t('resources.pageSubtitle')}
           description={t('resources.pageDescription')}
         />
-        <div className="mt-10 md:mt-20 px-4 md:px-8">
-          <div className="flex flex-wrap justify-center items-center content-center max-w-xl md:max-w-5xl p-4 md:p-[30px] mx-auto gap-2 md:gap-12 bg-[#1A1A1A40] shadow-[0px_5px_30px_0px_rgba(255,255,255,0.49)] rounded-3xl border border-white">
+
+        <div className="mt-6 self-center">
+          <div className="grid max-w-5xl grid-cols-2 px-4 md:grid-cols-3 md:px-0">
             {RESOURCES_CATEGORIES.map((resourceCategory) => (
               <Link
                 key={resourceCategory.name}
