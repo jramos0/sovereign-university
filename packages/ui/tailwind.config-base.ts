@@ -210,6 +210,7 @@ const baseConfig: Config = {
       },
       letterSpacing: {
         '015px': '0.15px',
+        neon: '0 0 8px #FF5C0040, 0 0 16px #FF5C0040, 0 0 24px #FF5C0040',
       },
     },
   },
