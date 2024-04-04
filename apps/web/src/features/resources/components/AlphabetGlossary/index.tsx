@@ -7,41 +7,68 @@ export const AlphabetGlossary: React.FC<{
 }> = ({ onLetterSelect }) => {
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
 
-  // Divide las letras en filas
-  const rows = [
-    [...'ABCDEFGHI'], // Primera fila
-    [...'JKLMNOPQR'], // Segunda fila
-    [...'STUVWXYZ'], // Tercera fila
-  ];
-
-  /*const handleLetterClick = (letter: string) => {
-    setSelectedLetter(letter);
-  };*/
   const handleLetterClick = (letter: string) => {
     setSelectedLetter(letter);
-    onLetterSelect(letter); // Llamar a la función pasada como prop
-    console.log(letter); // Esto imprimirá la letra en consola cada vez que se hace clic en un botón.
+    onLetterSelect(letter);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      {rows.map((row, idx) => (
-        <div key={idx} className="flex justify-center">
-          {row.map((letter) => (
-            <button
-              key={letter}
-              className={`m-1 p-2 rounded-full size-10 flex items-center justify-center font-bold ${
-                selectedLetter === letter
-                  ? 'bg-orange-500 text-white'
-                  : 'bg-[#1F242D] text-gray-300'
-              }`}
-              onClick={() => handleLetterClick(letter)}
-            >
-              {letter}
-            </button>
-          ))}
-        </div>
-      ))}
+    <div>
+      {/* Grid for bigger screens  (md en adelante) */}
+      <div className="hidden md:w-4/5 md:grid md:mx-auto md:grid-cols-9  md:justify-center">
+        {[...'ABCDEFGHI'].map((letter) => (
+          <LetterButton
+            letter={letter}
+            selectedLetter={selectedLetter}
+            onClick={handleLetterClick}
+          />
+        ))}
+        {[...'JKLMNOPQR'].map((letter) => (
+          <LetterButton
+            letter={letter}
+            selectedLetter={selectedLetter}
+            onClick={handleLetterClick}
+          />
+        ))}
+        {[...'RSTUVWXYZ'].map((letter) => (
+          <LetterButton
+            letter={letter}
+            selectedLetter={selectedLetter}
+            onClick={handleLetterClick}
+          />
+        ))}
+      </div>
+
+      {/* Flex for small screens (menores a md) */}
+      <div className="md:hidden flex flex-wrap justify-center">
+        {[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].map((letter) => (
+          <LetterButton
+            letter={letter}
+            selectedLetter={selectedLetter}
+            onClick={handleLetterClick}
+          />
+        ))}
+      </div>
     </div>
+  );
+};
+
+// Componente auxiliar para los botones de letras
+const LetterButton: React.FC<{
+  letter: string;
+  selectedLetter: string | null;
+  onClick: (letter: string) => void;
+}> = ({ letter, selectedLetter, onClick }) => {
+  return (
+    <button
+      className={`m-1 p-2 rounded-full size-8 flex items-center justify-center font-bold text-sm ${
+        selectedLetter === letter
+          ? 'bg-orange-500 text-white'
+          : 'bg-[#1F242D] text-gray-300'
+      } sm:size-10 sm:text-base md:size-12 md:text-lg`}
+      onClick={() => onClick(letter)}
+    >
+      {letter}
+    </button>
   );
 };
