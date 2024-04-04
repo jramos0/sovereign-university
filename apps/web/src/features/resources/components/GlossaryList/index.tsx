@@ -18,7 +18,7 @@ export const GlossaryList: React.FC<GlossaryListProps> = ({
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="overflow-x-auto">
-        <table className="min-w-full text-sm divide-y divide-gray-200">
+        <table className="min-w-full text-sm divide-y divide-gray-400">
           <thead>
             <tr>
               <th className="p-4 text-left font-medium text-white">TERM</th>
@@ -46,6 +46,11 @@ export const GlossaryList: React.FC<GlossaryListProps> = ({
             )}
           </tbody>
         </table>
+        <div className="flex justify-center mt-4">
+          <button className="rounded-md border border-gray-400 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 px-6 py-2 transition-colors duration-300">
+            Load more words
+          </button>
+        </div>
       </div>
       {glossaryTerms.length > 0 && (
         <div className="flex justify-center mt-4">
