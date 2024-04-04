@@ -12,10 +12,10 @@ export const FilterBar = ({ value: initialValue = '', onChange }: Props) => {
   return (
     <div className="mx-2 w-full items-center justify-between rounded-lg px-4 py-2 text-xs sm:mx-8 sm:w-[40rem] sm:rounded-lg sm:px-6 sm:text-xs">
       <div className="mb-2 mr-3 grow">
-        <label className="mb-2 block text-orange-600 text-2xl justify-center text-center items-center font-normal">
+        <label className="mb-2 block text-orange-500 text-lg md:text-2xl justify-center text-center items-center font-normal">
           {'Need help defining a technical word?'}
         </label>
-        <label className="mb-2 block text-white text-2xl justify-center text-center items-center font-normal">
+        <label className="mb-2 block text-white text-lg md:text-2xl justify-center text-center items-center font-normal">
           {'Find the word you’re looking for:'}
         </label>
         <div style={{ display: 'flex', justifyContent: 'center' }}>

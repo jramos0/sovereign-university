@@ -1,14 +1,19 @@
 import type React from 'react';
 
-// Define el tipo para tus términos del glosario
 interface GlossaryTerm {
   term: string;
   definition: string;
 }
 
-// Componente de ejemplo que muestra términos y definiciones
-export const GlossaryList: React.FC<{ glossaryTerms: GlossaryTerm[] }> = ({
+interface GlossaryListProps {
+  glossaryTerms: GlossaryTerm[];
+  selectedLetter: string | null;
+}
+
+// Define el tipo para tus términos del glosario
+export const GlossaryList: React.FC<GlossaryListProps> = ({
   glossaryTerms,
+  selectedLetter,
 }) => {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -23,20 +28,32 @@ export const GlossaryList: React.FC<{ glossaryTerms: GlossaryTerm[] }> = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-700">
-            {glossaryTerms.map((term) => (
-              <tr key={term.term}>
-                <td className="p-4 text-orange-500 font-bold">{term.term}</td>
-                <td className="p-4 text-white">{term.definition}</td>
+            {glossaryTerms.length > 0 ? (
+              glossaryTerms.map((term) => (
+                <tr key={term.term}>
+                  <td className="p-4 text-orange-500 font-bold">{term.term}</td>
+                  <td className="p-4 text-white">{term.definition}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={2} className="p-4 text-center text-white">
+                  {selectedLetter
+                    ? `For now, we don't have words for the letter ${selectedLetter}.`
+                    : 'Select a letter to see the words.'}
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
-      <div className="flex justify-center mt-4">
-        <button className="rounded-full bg-gray-800 px-6 py-2 text-white hover:bg-gray-700 focus:outline-none focus:ring">
-          Load more words
-        </button>
-      </div>
+      {glossaryTerms.length > 0 && (
+        <div className="flex justify-center mt-4">
+          <button className="rounded-full bg-gray-800 px-6 py-2 text-white hover:bg-gray-700 focus:outline-none focus:ring">
+            Load more words
+          </button>
+        </div>
+      )}
     </div>
   );
 };

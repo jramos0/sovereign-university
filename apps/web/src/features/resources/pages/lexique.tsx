@@ -6,7 +6,6 @@ import { GlossaryList } from '../components/GlossaryList/index.tsx';
 import { FilterBar } from '../components/NewFilterBar/index.tsx';
 import { ResourceLayout } from '../layout.tsx';
 
-// Definición del tipo para los términos del glosario
 interface GlossaryTerm {
   term: string;
   definition: string;
@@ -14,9 +13,18 @@ interface GlossaryTerm {
 
 export const Lexique = () => {
   const { t } = useTranslation();
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const [glossaryTerms, setGlossaryTerms] = useState<GlossaryTerm[]>([]);
 
-  // Aqui los datos que podrías cargar los términos cuando el usuario seleccione una letra en `AlphabetGlossary`
+  // Implementa la lógica para cargar los términos del glosario basados en la letra seleccionada
+  // Puedes hacer esto aquí mismo o en un useEffect si dependes de una llamada API
+  const handleLetterSelection = (letter: string) => {
+    console.log('Selected letter:', letter);
+    setSelectedLetter(letter);
+    // Aquí, establecerás los términos del glosario basados en la letra seleccionada.
+    // Por ejemplo:
+    // setGlossaryTerms(cargarTerminosGlosario(letter));
+  };
 
   return (
     <ResourceLayout
@@ -25,12 +33,12 @@ export const Lexique = () => {
     >
       <div className="flex flex-col gap-4 sm:gap-8">
         <FilterBar onChange={() => {}} />
-        <AlphabetGlossary
-          onLetterSelect={(letter) => {
-            // Aquí  la lógica para actualizar `glossaryTerms` basada en la letra seleccionada
-          }}
+        <AlphabetGlossary onLetterSelect={handleLetterSelection} />
+        {/* props necesarias a GlossaryList */}
+        <GlossaryList
+          glossaryTerms={glossaryTerms}
+          selectedLetter={selectedLetter}
         />
-        <GlossaryList glossaryTerms={glossaryTerms} />
       </div>
     </ResourceLayout>
   );
