@@ -10,7 +10,7 @@ import { Builders } from './pages/builders.tsx';
 import { Conference } from './pages/conference-details.tsx';
 import { Conferences } from './pages/conferences.tsx';
 import { Resources } from './pages/explorer.tsx';
-import { Lexique } from './pages/lexique.tsx';
+import { Glossary } from './pages/glossary.tsx';
 import { Podcast } from './pages/podcast-details.tsx';
 import { Podcasts } from './pages/podcasts.tsx';
 
@@ -43,10 +43,10 @@ export const betRoute = createRoute({
   component: BET,
 });
 
-export const lexiqueRoute = createRoute({
+export const glossaryRoute = createRoute({
   getParentRoute: () => resourcesRootRoute,
-  path: '/lexique',
-  component: Lexique,
+  path: '/glossary',
+  component: Glossary,
 });
 
 export const buildersRoute = createRoute({
@@ -103,7 +103,7 @@ export const resourcesRoutes = resourcesRootRoute.addChildren([
   builderDetailsRoute,
   podcastsRoute,
   betRoute,
-  lexiqueRoute,
+  glossaryRoute,
   podcastDetailsRoute,
   conferencesRoute,
   conferenceDetailsRoute,

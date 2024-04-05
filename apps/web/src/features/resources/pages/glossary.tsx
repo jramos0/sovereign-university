@@ -11,10 +11,10 @@ interface GlossaryTerm {
   definition: string;
 }
 
-export const Lexique = () => {
+export const Glossary = () => {
   const { t } = useTranslation();
   const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
-  const [glossaryTerms, setGlossaryTerms] = useState<GlossaryTerm[]>([]);
+  const [glossaryTerms] = useState<GlossaryTerm[]>([]);
 
   // Implementa la lógica para cargar los términos del glosario basados en la letra seleccionada
   // Puedes hacer esto aquí mismo o en un useEffect si dependes de una llamada API
