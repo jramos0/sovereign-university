@@ -64,9 +64,9 @@ export enum Routes {
   Tool = '/tools/:toolId',
   BIPs = '/bips',
   BIP = '/bips/:bipId',
-  Conferences = '/resources/conferences',
-  Conference = '/resources/conferences/:conferenceId',
-  Lexique = '/lexique',
+  Conferences = '/conferences',
+  Conference = '/conferences/:conferenceId',
+  Glossary = '/glossary',
   Calendar = '/calendar',
   Contact = '/contact',
 }
