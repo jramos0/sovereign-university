@@ -13,6 +13,7 @@ import { Resources } from './pages/explorer.tsx';
 import { Glossary } from './pages/glossary.tsx';
 import { Podcast } from './pages/podcast-details.tsx';
 import { Podcasts } from './pages/podcasts.tsx';
+import { WordGlossary } from './pages/word-glossary.tsx';
 
 const resourcesRootRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -47,6 +48,12 @@ export const glossaryRoute = createRoute({
   getParentRoute: () => resourcesRootRoute,
   path: '/glossary',
   component: Glossary,
+});
+
+export const wordglossaryRoute = createRoute({
+  getParentRoute: () => resourcesRootRoute,
+  path: '/word-glossary',
+  component: WordGlossary,
 });
 
 export const buildersRoute = createRoute({
@@ -108,6 +115,7 @@ export const resourcesRoutes = resourcesRootRoute.addChildren([
   conferencesRoute,
   conferenceDetailsRoute,
   // Later
+  wordglossaryRoute,
   articlesRoute,
   newslettersRoute,
 ]);

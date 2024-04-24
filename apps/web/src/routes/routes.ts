@@ -67,6 +67,7 @@ export enum Routes {
   Conferences = '/conferences',
   Conference = '/conferences/:conferenceId',
   Glossary = '/glossary',
+  WordGlossary = '/word/wordid',
   Calendar = '/calendar',
   Contact = '/contact',
 }

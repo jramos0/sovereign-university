@@ -16,7 +16,7 @@ export const GlossaryList: React.FC<GlossaryListProps> = ({
   selectedLetter,
 }) => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 md:py-8">
       <div className="overflow-x-auto">
         <table className="min-w-full text-sm divide-y divide-gray-400">
           <thead>
