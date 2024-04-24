@@ -15,7 +15,7 @@ export const AlphabetGlossary: React.FC<{
   return (
     <div>
       {/* Grid for bigger screens  (md en adelante) */}
-      <div className="hidden md:w-4/5 md:grid md:mx-auto md:grid-cols-9  md:justify-center">
+      <div className="hidden  md:grid md:mx-auto md:grid-cols-9  md:justify-center">
         {[...'ABCDEFGHI'].map((letter) => (
           <LetterButton
             letter={letter}
@@ -39,7 +39,7 @@ export const AlphabetGlossary: React.FC<{
         ))}
       </div>
 
-      {/* Flex for small screens (menores a md) */}
+      {/* Flex for small screens (menores a md) 
       <div className="md:hidden flex flex-wrap justify-center">
         {[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].map((letter) => (
           <LetterButton
@@ -48,7 +48,7 @@ export const AlphabetGlossary: React.FC<{
             onClick={handleLetterClick}
           />
         ))}
-      </div>
+      </div>*/}
     </div>
   );
 };
