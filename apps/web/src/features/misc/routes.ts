@@ -3,6 +3,7 @@ import { createRoute } from '@tanstack/react-router';
 import { rootRoute } from '../../routes/root.tsx';
 
 import { About } from './pages/about.tsx';
+import { CommunityNetwork } from './pages/community-network.tsx';
 import { Home } from './pages/home.tsx';
 import { Manifesto } from './pages/manifesto.tsx';
 import { NodeNetwork } from './pages/node-network.tsx';
@@ -66,6 +67,12 @@ export const nodeNetworkRoute = createRoute({
   component: NodeNetwork,
 });
 
+export const CommunityNetworkRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/community-network',
+  component: CommunityNetwork,
+});
+
 export const termsAndConditionsROute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/terms-and-conditions',
@@ -76,6 +83,7 @@ export const miscRoutes = [
   globalNotFoundRoute,
   homeRoute,
   aboutRoute,
+  CommunityNetworkRoute,
   nodeNetworkRoute,
   manifestoRoute,
   notFoundRoute,

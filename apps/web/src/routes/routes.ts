@@ -13,6 +13,9 @@ export enum Routes {
   Professors = '/professors',
   SponsorsAndContributors = '/sponsors-and-contributors',
 
+  //Community
+  CommunityNetwork = '/community-network',
+
   // Courses
   Courses = '/courses',
   Course = '/course/:courseId/:language?',
