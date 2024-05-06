@@ -2,6 +2,7 @@ import {
   BreakPointHooks,
   breakpointsTailwind,
 } from '@react-hooks-library/core';
+import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { Button, cn } from '@sovereign-university/ui';
@@ -10,6 +11,8 @@ import { PageLayout } from '#src/components/PageLayout/index.tsx';
 
 import communityMap from '../../../assets/community/communitymaps.svg';
 import { useDisclosure } from '../../../hooks/index.ts';
+import { trpc } from '../../../utils/index.ts';
+import { BuilderCard } from '../../resources/components/Cards/builder-card.tsx';
 
 const QnAItem = ({
   question,
@@ -83,7 +86,8 @@ const QnA = () => {
 };
 
 export const CommunityNetwork = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
   const { useGreater } = BreakPointHooks(breakpointsTailwind);
   const isScreenXl = useGreater('xl');
   const isScreenLg = useGreater('lg');
@@ -103,13 +107,54 @@ export const CommunityNetwork = () => {
     mapWidth = window.innerWidth - 100;
   }
 
+  const {
+    data: builders,
+    isLoading,
+    isError,
+  } = trpc.content.getBuilders.useQuery({
+    language: i18n.language ?? 'en',
+  });
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error loading Communities.</p>;
+
+  const miningBuilders = (builders ?? []).filter(
+    (builder) => builder.category === 'community',
+  );
+
   return (
     <PageLayout
       title={t('communityNetwork.title')}
-      subtitle={t('about.subtitle')}
-      description={t('about.description')}
+      subtitle={t('communityNetwork.subtitle')}
+      description={t('communityNetwork.content')}
     >
       <div className="flex flex-col items-center">
+        <div className="col-span-1 gap-6 lg:grid-cols-2 self-start">
+          <div className="mt-5 flex flex-row flex-wrap justify-center items-center gap-4 md:gap-11">
+            {/* Aqui iria la parte del componente BuilderCard */}
+            <div className="mb-12  self-start">
+              <h2 className="mt-12 text-3xl font-semibold uppercase text-orange-500">
+                {t('communityNetwork.sectitle')}
+              </h2>
+            </div>
+            {miningBuilders.map((builder) => (
+              <Link
+                key={builder.id}
+                to={`/resources/builder/${builder.id}`}
+                params={{
+                  builderId: builder.id.toString(),
+                }}
+              >
+                <BuilderCard name={builder.name} logo={builder.logo} />
+              </Link>
+            ))}
+          </div>
+
+          <div className="mb-12  self-start">
+            <h2 className="mt-12 text-3xl font-semibold uppercase text-orange-500">
+              {t('communityNetwork.sectitle')}
+            </h2>
+          </div>
+        </div>
         <div className="mx-8 mt-8 flex max-w-4xl flex-col items-center text-white">
           <div className="mb-12 w-fit content-center self-center">
             <img
