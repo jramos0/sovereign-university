@@ -130,7 +130,7 @@ export const CommunityNetwork = () => {
       <div className="flex flex-col items-center">
         <div className="col-span-1 gap-6 lg:grid-cols-2 self-start">
           <div className="mt-5 flex flex-row flex-wrap justify-center items-center gap-4 md:gap-11">
-            {/* Aqui iria la parte del componente BuilderCard */}
+            {/* Here is the part of the CN builder card */}
             <div className="mb-12  self-start">
               <h2 className="mt-12 text-3xl font-semibold uppercase text-orange-500">
                 {t('communityNetwork.sectitle')}
