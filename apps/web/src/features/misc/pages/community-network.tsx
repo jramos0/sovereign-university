@@ -129,24 +129,28 @@ export const CommunityNetwork = () => {
     >
       <div className="flex flex-col items-center">
         <div className="col-span-1 gap-6 lg:grid-cols-2 self-start">
-          <div className="mt-5 flex flex-row flex-wrap justify-center items-center gap-4 md:gap-11">
-            {/* Here is the part of the CN builder card */}
-            <div className="mb-12  self-start">
-              <h2 className="mt-12 text-3xl font-semibold uppercase text-orange-500">
+          <div className="mt-5 mx-4 sm:mx-6 md:mx-8 lg:mx-10 flex flex-col justify-center items-center gap-4 md:gap-11">
+            {/* Title in its own row, aligned to the left */}
+            <div className="w-full">
+              <h2 className="text-3xl font-semibold uppercase text-orange-500">
                 {t('communityNetwork.sectitle')}
               </h2>
             </div>
-            {miningBuilders.map((builder) => (
-              <Link
-                key={builder.id}
-                to={`/resources/builder/${builder.id}`}
-                params={{
-                  builderId: builder.id.toString(),
-                }}
-              >
-                <BuilderCard name={builder.name} logo={builder.logo} />
-              </Link>
-            ))}
+
+            {/* Row for the builder cards */}
+            <div className="flex flex-row flex-wrap items-start gap-4 md:gap-11">
+              {miningBuilders.map((builder) => (
+                <Link
+                  key={builder.id}
+                  to={`/resources/builder/${builder.id}`}
+                  params={{
+                    builderId: builder.id.toString(),
+                  }}
+                >
+                  <BuilderCard name={builder.name} logo={builder.logo} />
+                </Link>
+              ))}
+            </div>
           </div>
 
           <div className="mb-12  self-start">

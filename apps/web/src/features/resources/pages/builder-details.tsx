@@ -10,6 +10,9 @@ import { Card } from '../../../atoms/Card/index.tsx';
 import { Tag } from '../../../atoms/Tag/index.tsx';
 import { useNavigateMisc } from '../../../hooks/index.ts';
 import { trpc } from '../../../utils/index.ts';
+import { RelatedWork } from '../components/RelatedWork/index.tsx';
+import { BuilderCard } from '../../resources/components/Cards/builder-card.tsx';
+
 import { ResourceLayout } from '../layout.tsx';
 
 export const Builder = () => {
@@ -132,6 +135,24 @@ export const Builder = () => {
           </div>
         </Card>
       )}
+
+      <div>
+        {builder?.category === 'community' && <RelatedWork />}
+        {/* Row for the community builder cards 
+  <div className="flex flex-row flex-wrap items-start gap-4 md:gap-11">
+    {communityBuilders.map((communityBuilder) => (
+      <Link
+        key={communityBuilder.id}
+        to={`/resources/builder/${communityBuilder.id}`}
+        params={{
+          builderId: communityBuilder.id.toString(),
+        }}
+      >
+        <BuilderCard name={communityBuilder.name} logo={communityBuilder.logo} />
+      </Link>
+    ))}
+  </div>*/}
+      </div>
     </ResourceLayout>
   );
 };
