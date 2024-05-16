@@ -152,12 +152,6 @@ export const CommunityNetwork = () => {
               ))}
             </div>
           </div>
-
-          <div className="mb-12  self-start">
-            <h2 className="mt-12 text-3xl font-semibold uppercase text-orange-500">
-              {t('communityNetwork.sectitle')}
-            </h2>
-          </div>
         </div>
         <div className="mx-8 mt-8 flex max-w-4xl flex-col items-center text-white">
           <div className="mb-12 w-fit content-center self-center">

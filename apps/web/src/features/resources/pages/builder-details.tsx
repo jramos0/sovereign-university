@@ -1,5 +1,5 @@
 import { Link, useParams } from '@tanstack/react-router';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BsGithub, BsLink, BsTwitter } from 'react-icons/bs';
 import { GiBirdMask } from 'react-icons/gi';
@@ -10,10 +10,12 @@ import { Card } from '../../../atoms/Card/index.tsx';
 import { Tag } from '../../../atoms/Tag/index.tsx';
 import { useNavigateMisc } from '../../../hooks/index.ts';
 import { trpc } from '../../../utils/index.ts';
+import { BuilderEvents } from '../components/BuilderEvents/index.tsx';
 import { RelatedWork } from '../components/RelatedWork/index.tsx';
-import { BuilderCard } from '../../resources/components/Cards/builder-card.tsx';
-
 import { ResourceLayout } from '../layout.tsx';
+
+
+const { useGreater } = BreakPointHooks(breakpointsTailwind);
 
 export const Builder = () => {
   const { navigateTo404 } = useNavigateMisc();
@@ -26,7 +28,16 @@ export const Builder = () => {
     id: Number(builderId),
     language: i18n.language ?? 'en',
   });
-  const navigateTo404Called = useRef(false);
+
+  const { data: events = [] } = trpc.content.getEvents.useQuery();
+
+  const builderEvents = useMemo(() => {
+    if (!builder || !events) return [];
+    const builderName = builder.name.toLowerCase();
+    return events.filter(
+      (event) => event.builder?.toLowerCase() === builderName,
+    );
+  }, [builder, events]);
 
   useEffect(() => {
     if (!builder && isFetched && !navigateTo404Called.current) {
@@ -34,6 +45,34 @@ export const Builder = () => {
       navigateTo404Called.current = true;
     }
   }, [builder, isFetched, navigateTo404]);
+
+  const navigateTo404Called = useRef(false);
+
+  const formatDate = (dateInput: string | Date) => {
+    let date: Date;
+    date = dateInput instanceof Date ? dateInput : new Date(dateInput);
+    if (isNaN(date.getTime())) {
+      console.error(`Invalid date: ${dateInput}`);
+      return t('builders.invalidDate');
+    }
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  const formatEventDates = (
+    startDate: string | Date,
+    endDate: string | Date,
+  ) => {
+    const start = formatDate(startDate);
+    const end = formatDate(endDate);
+    if (start === end) {
+      return start;
+    }
+    return `${start} to ${end}`;
+  };
 
   return (
     <ResourceLayout
@@ -111,47 +150,17 @@ export const Builder = () => {
               >
                 {builder?.description}
               </p>
-
-              {/* <RelatedResources
-                tutoriel={[{ label: 'Seed signer Device' }]}
-                interview={[
-                  {
-                    label: 'CEO Interview',
-                    path: replaceDynamicParam(Routes.Interview, {
-                      interviewId: 'ja78172',
-                    }),
-                  },
-                ]}
-                course={[
-                  {
-                    label: 'BTC 204',
-                    path: replaceDynamicParam(Routes.Course, {
-                      courseId: 'btc-204',
-                    }),
-                  },
-                ]}
-              /> */}
             </div>
           </div>
         </Card>
       )}
-
       <div>
-        {builder?.category === 'community' && <RelatedWork />}
-        {/* Row for the community builder cards 
-  <div className="flex flex-row flex-wrap items-start gap-4 md:gap-11">
-    {communityBuilders.map((communityBuilder) => (
-      <Link
-        key={communityBuilder.id}
-        to={`/resources/builder/${communityBuilder.id}`}
-        params={{
-          builderId: communityBuilder.id.toString(),
-        }}
-      >
-        <BuilderCard name={communityBuilder.name} logo={communityBuilder.logo} />
-      </Link>
-    ))}
-  </div>*/}
+        {builder?.category === 'community' && builderEvents.length > 0 && (
+          <BuilderEvents
+            events={builderEvents}
+            formatEventDates={formatEventDates}
+          />
+        )}
       </div>
     </ResourceLayout>
   );
