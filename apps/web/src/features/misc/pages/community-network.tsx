@@ -132,7 +132,7 @@ export const CommunityNetwork = () => {
           <div className="mt-5 mx-4 sm:mx-6 md:mx-8 lg:mx-10 flex flex-col justify-center items-center gap-4 md:gap-11">
             {/* Title in its own row, aligned to the left */}
             <div className="w-full">
-              <h2 className="text-3xl font-semibold uppercase text-orange-500">
+              <h2 className="text-xl sm:text-3xl font-semibold uppercase text-orange-500">
                 {t('communityNetwork.sectitle')}
               </h2>
             </div>
@@ -166,7 +166,7 @@ export const CommunityNetwork = () => {
           <QnA />
         </div>
         <a
-          className="mt-8 place-self-center"
+          className="sm:text-base mt-8 place-self-center"
           href="https://framaforms.org/node-application-planb-network-1708081674"
           target="_blank"
           rel="noopener noreferrer"
