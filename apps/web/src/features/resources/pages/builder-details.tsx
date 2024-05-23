@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { BsGithub, BsLink, BsTwitter } from 'react-icons/bs';
 import { GiBirdMask } from 'react-icons/gi';
 
-import { useGreater } from '#src/hooks/use-greater.js';
-
 import { Card } from '../../../atoms/Card/index.tsx';
 import { Tag } from '../../../atoms/Tag/index.tsx';
 import { useNavigateMisc } from '../../../hooks/index.ts';
@@ -14,8 +12,9 @@ import { BuilderEvents } from '../components/BuilderEvents/index.tsx';
 import { RelatedWork } from '../components/RelatedWork/index.tsx';
 import { ResourceLayout } from '../layout.tsx';
 
-
 const { useGreater } = BreakPointHooks(breakpointsTailwind);
+
+//const { useGreater } = BreakPointHooks(breakpointsTailwind);
 
 export const Builder = () => {
   const { navigateTo404 } = useNavigateMisc();
