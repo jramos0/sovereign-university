@@ -105,7 +105,8 @@
     "pageSubtitle": "This portal is open-source & open to contribution.",
     "pageTitle": "Conference replays",
     "planBConferences": "Plan B conferences",
-    "topics": "Topics"},
+    "topics": "Topics"
+  },
   "communityNetwork": {
     "answer1": "A node is simply a bitcoin community that wants to move to the next step and accelerate its own local Bitcoin adoption ! There is no minimum size to start with.",
     "answer2": "At Plan B we aim to improve the educational bitcoin ecosystem by providing the right tools to build and educate on Bitcoin. By becoming a node, your community will get access to a large range of resources, services, special educational training and more. Make your community count as a reference in the Bitcoin world.",
@@ -116,6 +117,8 @@
     "title": "Community Network",
     "subtitle": "Want to orange pill the world ? Join the PlanB Network.",
     "sectitle": "The Network Communities",
+    "related": "Related Work",
+    "date": "Date",
     "content": "Plan B Network helps communities worldwide to get organised in order to provide better education. The platform develops the tools necessary towards that goal, through the online academy, the tutorials portal, the Bitcoin educational toolkit and the resource portal.",
     "question1": "What's a node?",
     "question2": "What do I gain?",
