@@ -12,12 +12,24 @@ import { Card } from '../../../atoms/Card/index.tsx';
 import { Tag } from '../../../atoms/Tag/index.tsx';
 import { useNavigateMisc } from '../../../hooks/index.ts';
 import { trpc } from '../../../utils/index.ts';
+import { BuilderEvents } from '../components/BuilderEvents';
 import { RelatedWork } from '../components/RelatedWork/index.tsx';
 import { ResourceLayout } from '../layout.tsx';
 
-import { BuilderEvents } from '../components/BuilderEvents/index.tsx';
-
 const { useGreater } = BreakPointHooks(breakpointsTailwind);
+
+interface Event {
+  id: string;
+  path: string;
+  name: string;
+  startDate: string | Date;
+  endDate: string | Date;
+  addressLine1: string | null;
+  addressLine2: string | null;
+  type: string;
+  picture: string | null;
+  websiteUrl: string | null;
+}
 
 export const Builder = () => {
   const { navigateTo404 } = useNavigateMisc();
@@ -33,47 +45,32 @@ export const Builder = () => {
 
   const { data: events = [] } = trpc.content.getEvents.useQuery();
 
-  const builderEvents = useMemo(() => {
+  const builderEvents = useMemo<Event[]>(() => {
     if (!builder || !events) return [];
-    const builderName = builder.name.toLowerCase();
     return events.filter(
-      (event) => event.builder?.toLowerCase() === builderName,
+      (event) => event.builder?.toLowerCase() === builder.name.toLowerCase(),
     );
   }, [builder, events]);
 
   useEffect(() => {
-    if (!builder && isFetched && !navigateTo404Called.current) {
+    if (!builder && isFetched) {
       navigateTo404();
-      navigateTo404Called.current = true;
     }
   }, [builder, isFetched, navigateTo404]);
-
-  const navigateTo404Called = useRef(false);
-
-  const formatDate = (dateInput: string | Date) => {
-    let date: Date;
-    date = dateInput instanceof Date ? dateInput : new Date(dateInput);
-    if (isNaN(date.getTime())) {
-      console.error(`Invalid date: ${dateInput}`);
-      return t('builders.invalidDate');
-    }
-    return date.toLocaleDateString(undefined, {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
-  };
 
   const formatEventDates = (
     startDate: string | Date,
     endDate: string | Date,
-  ) => {
-    const start = formatDate(startDate);
-    const end = formatDate(endDate);
-    if (start === end) {
-      return start;
+  ): string => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      console.error(`Invalid date(s): ${startDate} - ${endDate}`);
+      return t('builders.invalidDate');
     }
-    return `${start} to ${end}`;
+    return start.toDateString() === end.toDateString()
+      ? start.toLocaleDateString()
+      : `${start.toLocaleDateString()} to ${end.toLocaleDateString()}`;
   };
 
   return (
@@ -156,6 +153,7 @@ export const Builder = () => {
           </div>
         </Card>
       )}
+
       <div>
         {builder?.category === 'community' && builderEvents.length > 0 && (
           <BuilderEvents
