@@ -5,8 +5,10 @@ import {
 import { Link, useParams } from '@tanstack/react-router';
 import { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BsBrowserChrome, BsGithub, BsTwitter } from 'react-icons/bs';
-import { GiBirdMask } from 'react-icons/gi';
+import { BsGithub } from 'react-icons/bs';
+import { TbWorld } from 'react-icons/tb';
+import { GiOstrich } from 'react-icons/gi';
+import { RiTwitterXLine } from 'react-icons/ri';
 
 import { Card } from '../../../atoms/Card/index.tsx';
 import { Tag } from '../../../atoms/Tag/index.tsx';
@@ -113,7 +115,7 @@ export const Builder = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <BsTwitter size={isScreenMd ? 32 : 24} />
+                      <RiTwitterXLine size={isScreenMd ? 32 : 24} />
                     </a>
                   )}
                   {builder?.nostr && (
@@ -122,7 +124,7 @@ export const Builder = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <GiBirdMask size={isScreenMd ? 32 : 24} />
+                      <GiOstrich size={isScreenMd ? 32 : 24} />
                     </a>
                   )}
                   {builder?.websiteUrl && (
@@ -131,7 +133,7 @@ export const Builder = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <BsBrowserChrome size={isScreenMd ? 32 : 24} />
+                      <TbWorld size={isScreenMd ? 32 : 24} />
                     </a>
                   )}
                 </div>
