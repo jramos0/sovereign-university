@@ -5,14 +5,14 @@ import {
 import { Link, useParams } from '@tanstack/react-router';
 import { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BsGithub, BsBrowserChrome, BsTwitter } from 'react-icons/bs';
+import { BsBrowserChrome, BsGithub, BsTwitter } from 'react-icons/bs';
 import { GiBirdMask } from 'react-icons/gi';
 
 import { Card } from '../../../atoms/Card/index.tsx';
 import { Tag } from '../../../atoms/Tag/index.tsx';
 import { useNavigateMisc } from '../../../hooks/index.ts';
 import { trpc } from '../../../utils/index.ts';
-import { BuilderEvents } from '../components/BuilderEvents';
+import { BuilderEvents } from '../components/BuilderEvents/index.tsx';
 import { RelatedWork } from '../components/RelatedWork/index.tsx';
 import { ResourceLayout } from '../layout.tsx';
 
@@ -83,17 +83,17 @@ export const Builder = () => {
     >
       {builder && (
         <Card className="mx-2 bg-orange-600/30 border-2 border-orange-500 md:mx-auto">
-          <div className="my-4 w-full grid-cols-1  px-4  sm:px-8 md:grid">
-            <div className="mx-2 flex flex-col sm:flex-row w-full">
-              <div className=" mb-4  items-center  md:mb-0 md:flex-col  md:pb-10 md:pr-16">
+          <div className="my-1 w-full grid-cols-1  px-4  sm:px-8 md:grid">
+            <div className="mx-2 flex flex-row w-full sm:items-start">
+              <div className="  items-center sm:mr-2 md:mb-0 md:flex-col  md:pb-2 ">
                 <img
                   src={builder?.logo}
-                  className="w-full"
+                  className="w-36 sm:size-40  rounded-lg"
                   alt={t('imagesAlt.sthRepresentingCompany')}
                 />
               </div>
-              <div className="col-span-2 row-span-1 mb-5 mt-1 font-light md:mb-0 md:ml-12">
-                <h3 className="col-span-1 row-span-1 mb-4 text-3xl font-semibold uppercase text-gray-200 sm:text-4xl md:mb-8">
+              <div className="col-span-2 row-span-1 mb-5 mx-3 mt-1 font-light md:mb-0 md:ml-1">
+                <h3 className="col-span-1 row-span-1 mb-4 text-xl md:text-3xl  font-semibold uppercase text-gray-200 sm:text-4xl md:mb-8">
                   {builder?.name}
                 </h3>
                 {/* This Logos Divs*/}
@@ -138,7 +138,7 @@ export const Builder = () => {
                 {builder?.tags?.map((tag) => (
                   <Link to={'/resources/builders'} key={tag}>
                     <Tag
-                      className="ml-1 bg-gray-400/80 text-gray-100 text-sm rounded-sm"
+                      className="ml-1 bg-gray-400/80 text-gray-100 text-xs sm:text-sm rounded-sm"
                       size={isScreenMd ? 'm' : 's'}
                     >
                       {tag}
@@ -147,7 +147,7 @@ export const Builder = () => {
                 ))}
               </div>
             </div>
-            <div className="col-span-2 sm:mt-12 row-span-5 ml-0 flex flex-col space-y-4 text-sm md:mx-12">
+            <div className="col-span-2 sm:mt-4 row-span-5 ml-0 flex flex-col space-y-4 text-sm ">
               <p
                 className="text-justify text-gray-200 text-sm md:text-base"
                 style={{ whiteSpace: 'pre-line' }}
